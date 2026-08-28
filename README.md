@@ -13,7 +13,7 @@ GitHub will publish the site at `https://<username>.github.io/<repository-name>/
 
 ## Before publishing publicly
 
-Replace every occurrence of `https://www.example.com` with the final public site URL. These values appear in canonical tags, structured data, `robots.txt`, and `sitemap.xml`.
+If the public domain changes, update every occurrence of `https://adcolproducts.vercel.app`. These values appear in canonical tags, structured data, `robots.txt`, and `sitemap.xml`.
 
 Also replace the contact-detail placeholders on the contact page with AdCool's real business details.
 
