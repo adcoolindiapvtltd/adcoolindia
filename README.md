@@ -17,6 +17,10 @@ If the public domain changes, update every occurrence of `https://adcolproducts.
 
 Also replace the contact-detail placeholders on the contact page with AdCool's real business details.
 
+## Enquiry email delivery
+
+Both enquiry forms send their submitted details to `adcoolproducts@gmail.com` through FormSubmit. After the website is deployed, submit one test enquiry and open the activation email sent by FormSubmit to this address. Click its confirmation link once; every future enquiry will then be delivered to the same inbox.
+
 ## Local preview
 
 Open `index.html` in a browser, or serve this folder with any static-file server.

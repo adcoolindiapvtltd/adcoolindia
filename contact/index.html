@@ -61,21 +61,29 @@
               <strong>WhatsApp</strong><br />+91 7988745047
             </div>
           </aside>
-          <form class="form">
-            <div><label>Name</label><input required autocomplete="name" /></div>
+          <form
+            class="form"
+            action="https://formsubmit.co/adcoolproducts@gmail.com"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New AdCool website enquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div><label for="contact-name">Name</label><input id="contact-name" name="Name" required autocomplete="name" /></div>
             <div>
-              <label>Company Name</label><input autocomplete="organization" />
+              <label for="contact-company">Company Name</label><input id="contact-company" name="Company Name" required autocomplete="organization" />
             </div>
             <div>
-              <label>Phone Number</label
-              ><input type="tel" required autocomplete="tel" />
+              <label for="contact-phone">Phone Number</label
+              ><input id="contact-phone" name="Phone Number" type="tel" required inputmode="numeric" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." autocomplete="tel" />
             </div>
             <div>
-              <label>Email</label><input type="email" autocomplete="email" />
+              <label for="contact-email">Email</label><input id="contact-email" name="Email" type="email" required autocomplete="email" />
             </div>
             <div>
-              <label>Product/Service Required</label
-              ><select>
+              <label for="contact-service">Product/Service Required</label
+              ><select id="contact-service" name="Product or Service Required" required>
+                <option value="" selected disabled>Select a product or service</option>
                 <option>Panel Air Conditioner</option>
                 <option>Air Cooled Chiller</option>
                 <option>Water Cooled Chiller</option>
@@ -85,10 +93,10 @@
                 <option>Other HVAC Requirement</option>
               </select>
             </div>
-            <div><label>Quantity</label><input /></div>
-            <div class="wide"><label>Location</label><input /></div>
+            <div><label for="contact-quantity">Quantity</label><input id="contact-quantity" name="Quantity" required /></div>
+            <div class="wide"><label for="contact-location">Location</label><input id="contact-location" name="Location" required /></div>
             <div class="wide">
-              <label>Requirement Details</label><textarea required></textarea>
+              <label for="contact-requirement">Requirement Details</label><textarea id="contact-requirement" name="Requirement Details" required></textarea>
             </div>
             <div class="wide"><button class="btn">Send Enquiry</button></div>
             <p class="notice">

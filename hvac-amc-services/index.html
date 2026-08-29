@@ -114,13 +114,20 @@
               Contact details are to be updated before launch.
             </p>
           </div>
-          <form class="form">
-            <div><label>Name</label><input required /></div>
-            <div><label>Company Name</label><input /></div>
-            <div><label>Phone Number</label><input type="tel" required /></div>
-            <div><label>Email</label><input type="email" /></div>
+          <form
+            class="form"
+            action="https://formsubmit.co/adcoolproducts@gmail.com"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="New AdCool AMC service enquiry" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" class="form-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div><label for="amc-name">Name</label><input id="amc-name" name="Name" required autocomplete="name" /></div>
+            <div><label for="amc-company">Company Name</label><input id="amc-company" name="Company Name" required autocomplete="organization" /></div>
+            <div><label for="amc-phone">Phone Number</label><input id="amc-phone" name="Phone Number" type="tel" required inputmode="numeric" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number." autocomplete="tel" /></div>
+            <div><label for="amc-email">Email</label><input id="amc-email" name="Email" type="email" required autocomplete="email" /></div>
             <div class="wide">
-              <label>Requirement Details</label><textarea required></textarea>
+              <label for="amc-requirement">Requirement Details</label><textarea id="amc-requirement" name="Requirement Details" required></textarea>
             </div>
             <div class="wide">
               <button class="btn">Send AMC Enquiry</button>

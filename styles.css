@@ -584,6 +584,129 @@ header {
   min-height: 130px;
   resize: vertical;
 }
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+}
+
+/* Shared page-loading skeleton */
+.skeleton-loader {
+  --skeleton-base: rgba(150, 150, 150, 0.3);
+  --skeleton-highlight: rgba(200, 200, 200, 0.4);
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  overflow: hidden;
+  background: #e0e0e0;
+  color: #333;
+  opacity: 1;
+  transition: opacity 0.42s ease, visibility 0.42s ease;
+}
+.skeleton-loader:before,
+.skeleton-loader:after {
+  position: absolute;
+  width: 42vw;
+  height: 42vw;
+  border-radius: 50%;
+  background: rgba(150, 150, 150, 0.15);
+  content: "";
+  filter: blur(10px);
+}
+.skeleton-loader:before {
+  top: -24vw;
+  right: -10vw;
+}
+.skeleton-loader:after {
+  bottom: -30vw;
+  left: -16vw;
+  background: rgba(120, 120, 120, 0.2);
+}
+.skeleton-loader.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+html.page-loading {
+  overflow: hidden;
+}
+html.page-loading body {
+  overflow: hidden;
+}
+.skeleton-shell {
+  position: relative;
+  z-index: 1;
+  width: min(100% - 64px, 1180px);
+  margin: 0 auto;
+}
+.skeleton-nav {
+  display: flex;
+  align-items: center;
+  height: 88px;
+  gap: 26px;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.4);
+}
+.skeleton-mark {
+  display: grid;
+  width: 41px;
+  height: 41px;
+  margin-right: auto;
+  place-items: center;
+  border: 1px solid rgba(120, 120, 120, 0.6);
+  border-radius: 10px;
+  color: rgba(80, 80, 80, 0.95);
+  font-family: Georgia, serif;
+  font-size: 1.4rem;
+}
+.skeleton-line,
+.skeleton-kicker,
+.skeleton-title,
+.skeleton-copy,
+.skeleton-button,
+.skeleton-section-title,
+.skeleton-section-copy,
+.skeleton-card span,
+.skeleton-card i,
+.skeleton-pill {
+  display: block;
+  background: linear-gradient(100deg, var(--skeleton-base) 25%, var(--skeleton-highlight) 42%, var(--skeleton-base) 58%);
+  background-size: 240% 100%;
+  animation: skeleton-shimmer 1.6s linear infinite;
+}
+.skeleton-nav-link { width: 62px; height: 10px; border-radius: 99px; }
+.skeleton-nav-link-last { width: 47px; }
+.skeleton-pill { width: 105px; height: 36px; margin-left: 8px; border-radius: 5px; }
+.skeleton-hero { padding: clamp(82px, 13vh, 148px) 0 78px; max-width: 725px; }
+.skeleton-kicker { width: 110px; height: 11px; margin-bottom: 23px; border-radius: 99px; }
+.skeleton-title { height: clamp(38px, 5vw, 66px); margin-bottom: 14px; border-radius: 7px; }
+.skeleton-title-wide { width: 96%; }
+.skeleton-title-short { width: 63%; }
+.skeleton-copy { width: 83%; height: 13px; margin-top: 26px; border-radius: 99px; }
+.skeleton-copy-short { width: 61%; margin-top: 11px; }
+.skeleton-button { width: 146px; height: 46px; margin-top: 32px; border-radius: 5px; }
+.skeleton-content { padding-top: 34px; }
+.skeleton-section-title { width: min(310px, 65%); height: 26px; margin-bottom: 14px; border-radius: 5px; }
+.skeleton-section-copy { width: min(520px, 86%); height: 12px; border-radius: 99px; }
+.skeleton-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 30px; }
+.skeleton-card { min-height: 135px; padding: 25px; border: 1px solid rgba(150, 150, 150, 0.5); background: rgba(220, 220, 220, 0.8); }
+.skeleton-card span { width: 55%; height: 17px; margin-bottom: 22px; border-radius: 4px; }
+.skeleton-card i { width: 100%; height: 10px; margin-top: 10px; border-radius: 99px; }
+.skeleton-card i:last-child { width: 74%; }
+@keyframes skeleton-shimmer { to { background-position: -140% 0; } }
+@media (max-width: 700px) {
+  .skeleton-shell { width: min(100% - 36px, 1180px); }
+  .skeleton-nav { height: 73px; gap: 14px; }
+  .skeleton-nav-link, .skeleton-nav-link-last { display: none; }
+  .skeleton-pill { width: 84px; height: 32px; }
+  .skeleton-hero { padding: 75px 0 58px; }
+  .skeleton-title-wide { width: 100%; }
+  .skeleton-title-short { width: 78%; }
+  .skeleton-copy { width: 100%; }
+  .skeleton-cards { grid-template-columns: 1fr; gap: 12px; }
+  .skeleton-card { min-height: 88px; padding: 18px; }
+  .skeleton-card-last { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-line, .skeleton-kicker, .skeleton-title, .skeleton-copy, .skeleton-button, .skeleton-section-title, .skeleton-section-copy, .skeleton-card span, .skeleton-card i, .skeleton-pill { animation: none; }
+}
 .form label {
   font-size: 0.78rem;
   font-weight: 700;
