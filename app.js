@@ -94,35 +94,7 @@ document.querySelectorAll("form").forEach((form) => {
     if (!form.checkValidity()) {
       e.preventDefault();
       form.reportValidity();
-      return;
     }
-
-    e.preventDefault();
-
-    const emailTo = form.dataset.emailTo || "adcoolproducts@gmail.com";
-    const formData = new FormData(form);
-    const emailSubject =
-      formData.get("_subject") || "New AdCool website enquiry";
-
-    const lines = [];
-    formData.forEach((value, key) => {
-      if (key === "_subject" || key === "_template" || key === "_honey") {
-        return;
-      }
-      lines.push(`${key}: ${value}`);
-    });
-
-    const emailBody = lines.join("\n");
-    const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(emailSubject.toString())}&body=${encodeURIComponent(emailBody)}`;
-
-    window.location.href = mailtoLink;
-
-    const n = form.querySelector(".notice");
-    if (n) {
-      n.classList.add("show");
-      n.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-    form.reset();
   });
 });
 const whatsapp = document.createElement("a");
