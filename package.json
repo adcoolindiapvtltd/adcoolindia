@@ -1,0 +1,21 @@
+{
+  "name": "adcoolproducts",
+  "version": "1.0.0",
+  "description": "AdCool Products - Industrial HVAC & Cooling Solutions",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static HTML site - no build step required'"
+  },
+  "keywords": [
+    "hvac",
+    "industrial-cooling",
+    "chillers",
+    "panel-ac"
+  ],
+  "author": "AdCool Products",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
