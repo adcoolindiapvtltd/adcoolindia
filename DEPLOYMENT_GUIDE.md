@@ -100,7 +100,11 @@ The verified production domain is `https://adcoolindia.com`. If the domain chang
    - Keep the address and phone consistent with this website. Do not list an unstaffed address as a customer-facing location.
    - Add the website URL, relevant business category, service area and genuine photos; do not add keywords to the business name.
 
-4. **Build search visibility over time**
+4. **Bing Webmaster Tools** (for Bing and Copilot discovery)
+   - Verify `adcoolindia.com` in Bing Webmaster Tools.
+   - Submit `https://adcoolindia.com/sitemap.xml` and inspect the homepage, product pages and AMC services page for crawl or indexing issues.
+
+5. **Build search visibility over time**
    - Add accurate product specifications, service coverage and answers to real customer questions as they are confirmed.
    - Earn relevant links and citations from genuine suppliers, customers, industry directories and local organizations.
    - Keep business contact details consistent and ask real customers for honest reviews without incentives.
