@@ -28,6 +28,29 @@ const STATUS_TITLES = {
   511: "Network authentication required"
 };
 
+const SECURITY_HEADERS = {
+  "Content-Security-Policy":
+    "base-uri 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests",
+  "Permissions-Policy": "camera=(), geolocation=(), microphone=()",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Strict-Transport-Security": "max-age=31536000",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "SAMEORIGIN"
+};
+
+function withSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  Object.entries(SECURITY_HEADERS).forEach(([name, value]) => {
+    headers.set(name, value);
+  });
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers
+  });
+}
+
 function renderErrorPage(status) {
   const isServerError = status >= 500;
   const title =
@@ -118,7 +141,7 @@ export default {
       response = await env.ASSETS.fetch(request);
     } catch (error) {
       console.error("Cloudflare Worker asset request failed", error);
-      return errorResponse(request, 500);
+      return withSecurityHeaders(errorResponse(request, 500));
     }
 
     if (
@@ -126,9 +149,11 @@ export default {
       response.status === 402 ||
       !acceptsHtml(request)
     ) {
-      return response;
+      return withSecurityHeaders(response);
     }
 
-    return errorResponse(request, response.status, response);
+    return withSecurityHeaders(
+      errorResponse(request, response.status, response)
+    );
   }
 };

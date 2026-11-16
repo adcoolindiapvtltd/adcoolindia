@@ -123,6 +123,7 @@ The verified production domain is `https://adcoolindia.com`. If the domain chang
 - .gitignore configured
 - No sensitive information in code
 - Links use HTTPS (recommended)
+- `public/_headers` sets security headers for static assets; the Worker applies the same headers to handled pages and error responses.
 
 ---
 
