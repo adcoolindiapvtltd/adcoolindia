@@ -47,19 +47,34 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
+        "@graph": [
           {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://adcoolindia.com/"
+            "@type": "ContactPage",
+            "@id": "https://adcoolindia.com/contact/#webpage",
+            "url": "https://adcoolindia.com/contact/",
+            "name": "Contact AdCool India | Panel AC, Chillers & AMC",
+            "description": "Contact AdCool India Private Limited in Gurugram, Haryana for industrial Panel AC, Chiller and AMC enquiries. Call +91 99531 95901 or request a quote.",
+            "isPartOf": { "@id": "https://adcoolindia.com/#website" },
+            "about": { "@id": "https://adcoolindia.com/#business" },
+            "mainEntity": { "@id": "https://adcoolindia.com/#business" },
+            "inLanguage": "en-IN"
           },
           {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Contact",
-            "item": "https://adcoolindia.com/contact/"
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://adcoolindia.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Contact",
+                "item": "https://adcoolindia.com/contact/"
+              }
+            ]
           }
         ]
       }

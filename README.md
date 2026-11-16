@@ -31,6 +31,10 @@ The Privacy Policy and Terms pages are available at `/privacy-policy/` and `/ter
 
 The site includes page-specific titles and descriptions, canonical URLs, Open Graph metadata, structured business/product/service/breadcrumb data, `robots.txt` and an XML sitemap. After the custom domain is live, verify it in Google Search Console and submit `https://adcoolindia.com/sitemap.xml`. Search rankings are not guaranteed and also depend on relevant content, local eligibility, competition and trustworthy links.
 
+## Answer engine readiness
+
+The homepage, product pages and AMC page provide visible, direct answers to common buyer questions. Their `FAQPage` structured data mirrors the on-page answers, while page and entity markup connects those pages to the business. Keep the visible answers and JSON-LD synchronized. Add only confirmed product specifications, prices, service areas, certifications and business profiles; do not infer missing facts. Structured data does not guarantee citations, rankings or enhanced search results. Search engines and answer engines make their own selection decisions.
+
 ## Local preview
 
 Serve this folder with any static-file server to test client-side page navigation.
