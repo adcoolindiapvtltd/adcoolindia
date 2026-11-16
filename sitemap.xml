@@ -1,9 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>https://adcolproducts.vercel.app/</loc></url>
-    <url><loc>https://adcolproducts.vercel.app/panel-air-conditioner</loc></url>
-    <url><loc>https://adcolproducts.vercel.app/chiller</loc></url>
-    <url><loc>https://adcolproducts.vercel.app/hvac-amc-services</loc></url>
-    <url><loc>https://adcolproducts.vercel.app/about</loc></url>
-    <url><loc>https://adcolproducts.vercel.app/contact</loc></url>
+  <url>
+    <loc>https://adcoolindia.com/</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/about</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/contact</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/panel-air-conditioner</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/chiller</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/hvac-amc-services</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/privacy-policy</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
+  <url>
+    <loc>https://adcoolindia.com/terms</loc>
+    <lastmod>2026-11-16</lastmod>
+  </url>
 </urlset>

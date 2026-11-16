@@ -59,7 +59,7 @@ git push -u origin main
 Before making your repository public, complete these items:
 
 ### Update Domain References
-Replace `https://adcolproducts.vercel.app` with your actual domain in these files:
+The verified production domain is `https://adcoolindia.com`. If the domain changes, update it consistently in:
 
 1. **robots.txt**
    - Update Sitemap URL to match your new domain
@@ -72,38 +72,39 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
 
 4. **Meta tags & Structured Data**
    - Update og:image URLs if hosting images externally
-   - Update organization URL in structured data
+   - Update the business, website and page URLs in structured data
 
 ### Verify Business Information
 1. **contact/index.html**
-   - Verify the business name and address
+   - Verify the business name
    - Verify phone number: +91 99531 95901
-   - Verify email: adcoolproducts@gmail.com
+   - Verify emails: info@adcoolindia.com and sales@adcoolindia.com
+   - Verify address: Tajnagar, Gurugram, Haryana, India
    - Update WhatsApp number if different
 
 ### Add Analytics & Verification
 1. **Google Analytics**
-   - Get your GA4 Measurement ID
-   - Add to every page in `<head>` before `</head>`
-   ```html
-   <!-- Google Analytics -->
-   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-   <script>
-     window.dataLayer = window.dataLayer || [];
-     function gtag(){dataLayer.push(arguments);}
-     gtag('js', new Date());
-     gtag('config', 'G-XXXXXXXXXX');
-   </script>
-   ```
+   - Analytics is currently disabled until the site owner supplies a GA4 Measurement ID.
+   - Set `ANALYTICS_MEASUREMENT_ID` in `app.js` to the verified `G-...` ID.
+   - Tracking loads only after the visitor explicitly allows analytics in the cookie banner.
+   - Do not install a separate analytics snippet that bypasses this consent flow.
 
 2. **Google Search Console**
-   - Add property at search.google.com
-   - Verify ownership
-   - Submit sitemap
+   - Add and DNS-verify the `adcoolindia.com` Domain property in Google Search Console.
+   - Submit `https://adcoolindia.com/sitemap.xml` after the custom domain and HTTPS are live.
+   - Use URL Inspection to request indexing for the homepage, product pages and AMC services page.
+   - Review indexing and Core Web Vitals reports regularly; correct crawl or usability issues shown there.
 
-3. **Google Business Profile** (optional)
-   - Claim your Google Business listing
-   - Add your website URL
+3. **Google Business Profile** (if eligible)
+   - Claim or create one profile using the exact business name and real, eligible business details.
+   - Keep the address and phone consistent with this website. Do not list an unstaffed address as a customer-facing location.
+   - Add the website URL, relevant business category, service area and genuine photos; do not add keywords to the business name.
+
+4. **Build search visibility over time**
+   - Add accurate product specifications, service coverage and answers to real customer questions as they are confirmed.
+   - Earn relevant links and citations from genuine suppliers, customers, industry directories and local organizations.
+   - Keep business contact details consistent and ask real customers for honest reviews without incentives.
+   - Rankings depend on competition, relevance, authority and user experience. No website change can guarantee a top position or a particular indexing date.
 
 ---
 
@@ -116,23 +117,26 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
 - Contact page with form
 - AMC services page for Panel AC and Chiller
 - Responsive mobile menu
-- WhatsApp floating button
-- Form validation
+- Sticky mobile call/WhatsApp/quote actions
+- Form validation, loading feedback and thank-you redirect
+- Privacy Policy, Terms and cookie-consent notice
+- Custom 404 page and complete favicon set
 
 ### Performance considerations
-- Skeleton loader with grey/white theme
-- Smooth page transitions
-- Optimized CSS and JavaScript
-- Image optimization
+- Client-side internal navigation with accessible loading feedback
+- Compressed JPEG imagery and self-hosted fonts
+- Responsive layouts for small screens through desktop
 - SEO-friendly structure
 
 ### SEO
 - robots.txt configured
-- sitemap.xml with all pages
+- sitemap.xml with indexable content and legal pages
 - Canonical tags on every page
-- Meta descriptions
-- Open Graph tags for social sharing
-- Twitter Card tags
+- Page-specific titles and descriptions
+- Open Graph and Twitter cards with a 1200×630 share image
+- 16/32px favicons, Apple touch icon, Android icons and web manifest
+- Descriptive alt text on content images
+- Noindex on redirect, thank-you and not-found pages
 - Structured data (Schema.org)
 - Proper heading hierarchy
 
@@ -160,10 +164,9 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
 - [ ] Monitor search performance
 
 ### 3. Setup Analytics
-- [ ] Configure Google Analytics
-- [ ] Create conversion goals
-- [ ] Track form submissions
-- [ ] Monitor traffic sources
+- [ ] Supply and set a verified GA4 Measurement ID in `app.js`
+- [ ] Verify tracking remains off until consent is accepted
+- [ ] Configure conversions after analytics is enabled
 
 ### 4. Custom Domain (Optional)
 If using your own domain:
@@ -177,13 +180,13 @@ If using your own domain:
 
 ## 📞 Contact Form Setup
 
-The contact form uses **FormSubmit.co** for email delivery:
+The enquiry forms use **FormSubmit.co** for email delivery:
 
 1. After deployment, visit your website
 2. Fill out and submit the contact form once
-3. You'll receive an activation email at `adcoolproducts@gmail.com`
+3. You'll receive an activation email at `sales@adcoolindia.com`
 4. Confirm by clicking the activation link
-5. All future submissions will be delivered to this email
+5. All future submissions will be delivered to the sales inbox and redirect to `/thank-you/`
 
 ---
 
@@ -199,11 +202,6 @@ The contact form uses **FormSubmit.co** for email delivery:
 - Verify all internal links use relative paths
 - Check that file paths are correct
 - Test on mobile and desktop
-
-### Skeleton loader not visible?
-- Check that CSS file loads properly
-- Open DevTools Console to verify no CSS errors
-- Refresh page and watch for skeleton during load
 
 ### Form not sending?
 - Ensure action attribute is correct in HTML
@@ -226,19 +224,19 @@ For questions about:
 ## 🎉 Success Criteria
 
 Your deployment is successful when:
-- ✅ Website accessible at GitHub Pages URL
+- ✅ Website accessible at `https://adcoolindia.com`
 - ✅ All pages load without errors
 - ✅ Navigation menu works
 - ✅ Forms submit successfully
 - ✅ Mobile responsive design works
-- ✅ Skeleton loader visible on page load
+- ✅ Custom 404, privacy policy and terms pages load
 - ✅ All images load correctly
 - ✅ Sitemap indexed by Google
-- ✅ Analytics tracking working
+- ✅ Analytics configured and consent-gated when a Measurement ID is supplied
 
 ---
 
 **Website Version**: 1.0 Production Ready
-**Last Updated**: 2026-08-29
+**Last Updated**: 2026-11-16
 **Deployed by**: GitHub Pages
 **Framework**: Static HTML/CSS/JavaScript

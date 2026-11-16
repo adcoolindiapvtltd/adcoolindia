@@ -1,6 +1,6 @@
 # AdCool India Private Limited website
 
-Static marketing website for AdCool India Private Limited, ready to deploy with GitHub Pages.
+Static marketing website for AdCool India Private Limited, deployed on the custom domain `https://adcoolindia.com`.
 
 ## Publish with GitHub Pages
 
@@ -13,13 +13,23 @@ GitHub will publish the site at `https://<username>.github.io/<repository-name>/
 
 ## Before publishing publicly
 
-If the public domain changes, update every occurrence of `https://adcolproducts.vercel.app`. These values appear in canonical tags, structured data, `robots.txt`, and `sitemap.xml`.
+The verified public domain is `https://adcoolindia.com`. If it changes, update canonical and Open Graph URLs, structured data, `robots.txt`, `sitemap.xml`, and FormSubmit's redirect URL together.
 
-Verify that the business name, address, phone number and email on the contact page are accurate before publishing.
+Verified public contact details are +91 99531 95901, `info@adcoolindia.com`, `sales@adcoolindia.com`, and Tajnagar, Gurugram, Haryana, India.
 
 ## Enquiry email delivery
 
-Both enquiry forms send their submitted details to `adcoolproducts@gmail.com` through FormSubmit. After the website is deployed, submit one test enquiry and open the activation email sent by FormSubmit to this address. Click its confirmation link once; every future enquiry will then be delivered to the same inbox.
+Both enquiry forms send submissions to `sales@adcoolindia.com` through FormSubmit and redirect to the site's thank-you page. After deployment, submit a test enquiry and complete FormSubmit's email activation for this inbox.
+
+## Analytics and consent
+
+Optional Google Analytics is opt-in only and is currently disabled because no GA4 Measurement ID has been supplied. Set `ANALYTICS_MEASUREMENT_ID` in `app.js` to the verified GA4 ID to enable the consent controls and defer tracking until acceptance. Do not add a separate analytics script that bypasses this consent flow.
+
+The Privacy Policy and Terms pages are available at `/privacy-policy` and `/terms`. Browser, Apple touch, Android and Open Graph assets are generated under `assets/`.
+
+## Search visibility
+
+The site includes page-specific titles and descriptions, canonical URLs, Open Graph metadata, structured business/product/service/breadcrumb data, `robots.txt` and an XML sitemap. After the custom domain is live, verify it in Google Search Console and submit `https://adcoolindia.com/sitemap.xml`. Search rankings are not guaranteed and also depend on relevant content, local eligibility, competition and trustworthy links.
 
 ## Local preview
 

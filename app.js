@@ -1,8 +1,196 @@
 const pageCache = new Map();
 let activeNavigation;
+const ANALYTICS_MEASUREMENT_ID = "";
+const CONSENT_NOTICE_KEY = "adc-cookie-notice-dismissed-v1";
+const ANALYTICS_CONSENT_KEY = ANALYTICS_MEASUREMENT_ID
+  ? `adc-analytics-consent:${ANALYTICS_MEASUREMENT_ID}`
+  : "";
+const WHATSAPP_URL =
+  "https://wa.me/919953195901?text=Hello%20AdCool%20India%20Private%20Limited%2C%20I%20would%20like%20to%20enquire%20about%20Panel%20AC%2C%20Chillers%20or%20AMC.";
 
 const normalizePath = (path) =>
   path.replace(/\/index\.html$/i, "").replace(/\/$/, "") || "/";
+
+function readStorage(key) {
+  try {
+    return window.localStorage.getItem(key);
+  } catch (error) {
+    console.error("Unable to read the saved cookie preference.", error);
+    return null;
+  }
+}
+
+function writeStorage(key, value) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch (error) {
+    console.error("Unable to save the cookie preference.", error);
+  }
+}
+
+function ensureNavigationStatus() {
+  if (document.querySelector(".navigation-status")) return;
+  const status = document.createElement("div");
+  status.className = "navigation-status";
+  status.setAttribute("role", "status");
+  status.setAttribute("aria-live", "polite");
+  status.textContent = "Loading page";
+  document.body.append(status);
+}
+
+function ensureMobileCta() {
+  let bar = document.querySelector(".mobile-bar");
+  if (!bar) {
+    bar = document.createElement("nav");
+    bar.className = "mobile-bar";
+    bar.setAttribute("aria-label", "Quick contact");
+
+    const call = document.createElement("a");
+    call.className = "mobile-bar-call";
+    call.href = "tel:+919953195901";
+    call.textContent = "Call";
+    bar.append(call);
+
+    const whatsapp = document.createElement("a");
+    whatsapp.className = "mobile-bar-whatsapp";
+    whatsapp.href = WHATSAPP_URL;
+    whatsapp.target = "_blank";
+    whatsapp.rel = "noopener";
+    whatsapp.textContent = "WhatsApp";
+    bar.append(whatsapp);
+
+    const quote = document.createElement("a");
+    quote.className = "btn";
+    quote.textContent = "Get a Quote";
+    bar.append(quote);
+    document.body.append(bar);
+  }
+
+  const quoteLink = document.querySelector(".nav > .btn");
+  const mobileQuoteLink = bar.querySelector(".btn");
+  if (quoteLink && mobileQuoteLink) {
+    mobileQuoteLink.href = quoteLink.href;
+  }
+}
+
+function loadAnalytics() {
+  if (
+    !ANALYTICS_MEASUREMENT_ID ||
+    readStorage(ANALYTICS_CONSENT_KEY) !== "accepted" ||
+    window.gtag
+  ) {
+    return;
+  }
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
+  };
+  window.gtag("js", new Date());
+  window.gtag("config", ANALYTICS_MEASUREMENT_ID, { send_page_view: false });
+
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(ANALYTICS_MEASUREMENT_ID)}`;
+  script.onerror = () => {
+    console.error("Google Analytics failed to load.");
+  };
+  document.head.append(script);
+  trackPageView();
+}
+
+function trackPageView() {
+  if (window.gtag) {
+    window.gtag("event", "page_view", {
+      page_path: `${window.location.pathname}${window.location.search}${window.location.hash}`,
+      page_title: document.title,
+    });
+  }
+}
+
+function showCookieBanner() {
+  let banner = document.querySelector(".cookie-banner");
+  if (!banner) {
+    banner = document.createElement("section");
+    banner.className = "cookie-banner";
+    banner.setAttribute("aria-label", "Cookie and analytics preferences");
+
+    const message = document.createElement("p");
+    message.className = "cookie-banner-message";
+    if (ANALYTICS_MEASUREMENT_ID) {
+      message.textContent =
+        "We use essential storage for site preferences. Optional Google Analytics is loaded only if you allow it.";
+      banner.append(message);
+
+      const accept = document.createElement("button");
+      accept.className = "btn";
+      accept.type = "button";
+      accept.dataset.analyticsConsent = "accepted";
+      accept.textContent = "Allow analytics";
+      banner.append(accept);
+
+      const reject = document.createElement("button");
+      reject.className = "cookie-reject";
+      reject.type = "button";
+      reject.dataset.analyticsConsent = "rejected";
+      reject.textContent = "Reject analytics";
+      banner.append(reject);
+    } else {
+      message.textContent =
+        "Optional analytics are not configured. No analytics tracking is active; we will ask for your consent before enabling it.";
+      banner.append(message);
+
+      const dismiss = document.createElement("button");
+      dismiss.className = "btn";
+      dismiss.type = "button";
+      dismiss.dataset.cookieDismiss = "true";
+      dismiss.textContent = "Got it";
+      banner.append(dismiss);
+    }
+
+    const privacyLink = document.createElement("a");
+    privacyLink.href = new URL("/privacy-policy", window.location.origin).href;
+    privacyLink.textContent = "Privacy policy";
+    banner.append(privacyLink);
+    document.body.append(banner);
+  }
+  banner.hidden = false;
+}
+
+function initializeCookieBanner() {
+  if (ANALYTICS_MEASUREMENT_ID) {
+    if (readStorage(ANALYTICS_CONSENT_KEY) === "accepted") {
+      loadAnalytics();
+      return;
+    }
+    if (readStorage(ANALYTICS_CONSENT_KEY) === "rejected") return;
+  } else if (readStorage(CONSENT_NOTICE_KEY) === "dismissed") {
+    return;
+  }
+  showCookieBanner();
+}
+
+function updateFormErrorState(field) {
+  const form = field.closest("form");
+  if (!form) return;
+  const invalid = !field.validity.valid;
+  if (form.classList.contains("was-validated")) {
+    field.setAttribute("aria-invalid", String(invalid));
+  }
+
+  const summary = form.querySelector(".form-error-summary");
+  if (summary && form.classList.contains("was-validated")) {
+    const hasErrors = [...form.elements].some(
+      (control) =>
+        control instanceof HTMLInputElement ||
+        control instanceof HTMLTextAreaElement ||
+        control instanceof HTMLSelectElement
+          ? control.willValidate && !control.validity.valid
+          : false,
+    );
+    summary.hidden = !hasErrors;
+  }
+}
 
 function closeMenus() {
   document.querySelectorAll(".nav-links.open").forEach((navLinks) => {
@@ -114,10 +302,18 @@ function updateHead(page) {
 
   const headElements = [
     ['meta[name="description"]', "content"],
+    ['meta[property="og:type"]', "content"],
     ['meta[property="og:title"]', "content"],
     ['meta[property="og:description"]', "content"],
+    ['meta[property="og:url"]', "content"],
     ['meta[property="og:image"]', "content"],
+    ['meta[property="og:image:alt"]', "content"],
+    ['meta[property="og:image:width"]', "content"],
+    ['meta[property="og:image:height"]', "content"],
     ['meta[name="twitter:card"]', "content"],
+    ['meta[name="twitter:title"]', "content"],
+    ['meta[name="twitter:description"]', "content"],
+    ['meta[name="twitter:image"]', "content"],
     ['link[rel="canonical"]', "href"],
   ];
 
@@ -154,6 +350,8 @@ function updatePage(page, url, scrollY) {
     );
   });
   updateCurrentPage();
+  ensureMobileCta();
+  trackPageView();
 
   const heading = document.querySelector("main h1");
   if (heading) {
@@ -181,6 +379,10 @@ async function navigate(url, { push = true, scrollY = 0 } = {}) {
   activeNavigation = controller;
   const currentMain = document.querySelector("main");
   currentMain?.setAttribute("aria-busy", "true");
+  document.body.classList.add("is-navigating");
+  ensureNavigationStatus();
+  const navigationStatus = document.querySelector(".navigation-status");
+  if (navigationStatus) navigationStatus.textContent = "Loading page";
 
   try {
     const { page, url: destination } = await fetchPage(url, controller.signal);
@@ -202,7 +404,11 @@ async function navigate(url, { push = true, scrollY = 0 } = {}) {
     }
   } finally {
     currentMain?.removeAttribute("aria-busy");
-    if (activeNavigation === controller) activeNavigation = undefined;
+    if (activeNavigation === controller) {
+      activeNavigation = undefined;
+      document.body.classList.remove("is-navigating");
+      if (navigationStatus) navigationStatus.textContent = "";
+    }
   }
 }
 
@@ -211,6 +417,11 @@ if ("scrollRestoration" in history) {
 }
 
 updateCurrentPage();
+ensureMobileCta();
+initializeCookieBanner();
+if (ANALYTICS_MEASUREMENT_ID && readStorage(ANALYTICS_CONSENT_KEY) === "accepted") {
+  loadAnalytics();
+}
 window.addEventListener("resize", updateCallButton);
 window.addEventListener("popstate", (event) => {
   void navigate(new URL(window.location.href), {
@@ -282,12 +493,37 @@ document.addEventListener("input", (event) => {
         field.value.trim() ? "" : "Please enter a valid value.",
       );
     }
+    updateFormErrorState(field);
   }
 });
+
+document.addEventListener(
+  "invalid",
+  (event) => {
+    const field = event.target;
+    if (
+      field instanceof HTMLInputElement ||
+      field instanceof HTMLTextAreaElement ||
+      field instanceof HTMLSelectElement
+    ) {
+      const form = field.closest(".form");
+      if (!form) return;
+      form.classList.add("was-validated");
+      field.setAttribute("aria-invalid", "true");
+      const summary = form.querySelector(".form-error-summary");
+      if (summary) summary.hidden = false;
+    }
+  },
+  true,
+);
 
 document.addEventListener("submit", (event) => {
   const form = event.target;
   if (!(form instanceof HTMLFormElement)) return;
+  if (form.dataset.submitting === "true") {
+    event.preventDefault();
+    return;
+  }
 
   form.querySelectorAll(
     "input[required], textarea[required], select[required]",
@@ -299,15 +535,36 @@ document.addEventListener("submit", (event) => {
 
   if (!form.checkValidity()) {
     event.preventDefault();
+    form.classList.add("was-validated");
+    form.querySelectorAll(
+      "input[required], textarea[required], select[required]",
+    ).forEach((field) => {
+      field.setAttribute("aria-invalid", String(!field.checkValidity()));
+    });
+    const summary = form.querySelector(".form-error-summary");
+    if (summary) summary.hidden = false;
     form.reportValidity();
+    return;
+  }
+
+  form.dataset.submitting = "true";
+  form.setAttribute("aria-busy", "true");
+  const status = form.querySelector(".form-status");
+  if (status) {
+    status.hidden = false;
+    status.textContent = "Sending your enquiry…";
+  }
+  const submitButton = form.querySelector('button[type="submit"]');
+  if (submitButton) {
+    submitButton.setAttribute("aria-disabled", "true");
+    submitButton.textContent = "Sending…";
   }
 });
 
 if (!document.querySelector(".whatsapp-float")) {
   const whatsapp = document.createElement("a");
   whatsapp.className = "whatsapp-float";
-  whatsapp.href =
-    "https://wa.me/919953195901?text=Hello%20AdCool%20India%20Private%20Limited%2C%20I%20would%20like%20to%20enquire%20about%20Panel%20AC%2C%20Chillers%20or%20AMC.";
+  whatsapp.href = WHATSAPP_URL;
   whatsapp.target = "_blank";
   whatsapp.rel = "noopener";
   whatsapp.setAttribute(
@@ -323,3 +580,28 @@ if (!document.querySelector(".whatsapp-float")) {
     <span>WhatsApp Us</span>`;
   document.body.append(whatsapp);
 }
+
+document.addEventListener("click", (event) => {
+  const target = event.target instanceof Element ? event.target : null;
+  if (!target) return;
+
+  const consentButton = target.closest("[data-analytics-consent]");
+  if (consentButton && ANALYTICS_MEASUREMENT_ID) {
+    const preference = consentButton.dataset.analyticsConsent;
+    writeStorage(ANALYTICS_CONSENT_KEY, preference);
+    document.querySelector(".cookie-banner")?.remove();
+    if (preference === "accepted") loadAnalytics();
+    return;
+  }
+
+  if (target.closest("[data-cookie-dismiss]")) {
+    writeStorage(CONSENT_NOTICE_KEY, "dismissed");
+    document.querySelector(".cookie-banner")?.remove();
+    return;
+  }
+
+  if (target.closest("[data-cookie-settings]")) {
+    event.preventDefault();
+    showCookieBanner();
+  }
+});
