@@ -25,7 +25,7 @@ Both enquiry forms send submissions to `sales@adcoolindia.com` through FormSubmi
 
 Optional Google Analytics is opt-in only and is currently disabled because no GA4 Measurement ID has been supplied. Set `ANALYTICS_MEASUREMENT_ID` in `app.js` to the verified GA4 ID to enable the consent controls and defer tracking until acceptance. Do not add a separate analytics script that bypasses this consent flow.
 
-The Privacy Policy and Terms pages are available at `/privacy-policy` and `/terms`. Browser, Apple touch, Android and Open Graph assets are generated under `assets/`.
+The Privacy Policy and Terms pages are available at `/privacy-policy/` and `/terms/`. Browser, Apple touch, Android and Open Graph assets are generated under `assets/`.
 
 ## Search visibility
 

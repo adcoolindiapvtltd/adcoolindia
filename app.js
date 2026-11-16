@@ -149,7 +149,7 @@ function showCookieBanner() {
     }
 
     const privacyLink = document.createElement("a");
-    privacyLink.href = new URL("/privacy-policy", window.location.origin).href;
+    privacyLink.href = new URL("/privacy-policy/", window.location.origin).href;
     privacyLink.textContent = "Privacy policy";
     banner.append(privacyLink);
     document.body.append(banner);
