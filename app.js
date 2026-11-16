@@ -1,7 +1,10 @@
 const skeletonLoader = document.createElement("div");
 skeletonLoader.className = "skeleton-loader";
 skeletonLoader.setAttribute("role", "status");
-skeletonLoader.setAttribute("aria-label", "Loading AdCool Products website");
+skeletonLoader.setAttribute(
+  "aria-label",
+  "Loading AdCool India Private Limited website",
+);
 skeletonLoader.innerHTML = `
   <div class="skeleton-shell">
     <div class="skeleton-nav">
@@ -33,6 +36,16 @@ skeletonLoader.innerHTML = `
 document.body.prepend(skeletonLoader);
 document.documentElement.classList.add("page-loading");
 
+const mainContent = document.querySelector("main");
+if (mainContent) {
+  mainContent.id ||= "main-content";
+  const skipLink = document.createElement("a");
+  skipLink.className = "skip-link";
+  skipLink.href = `#${mainContent.id}`;
+  skipLink.textContent = "Skip to main content";
+  document.body.prepend(skipLink);
+}
+
 const skeletonStartedAt = performance.now();
 let skeletonHasFinished = false;
 const finishSkeleton = () => {
@@ -55,11 +68,37 @@ if (document.readyState === "complete") {
   window.setTimeout(finishSkeleton, 7000);
 }
 
-document
-  .querySelector(".menu-btn")
-  ?.addEventListener("click", () =>
-    document.querySelector(".nav-links").classList.toggle("open"),
-  );
+const menuButton = document.querySelector(".menu-btn");
+const navLinks = document.querySelector(".nav-links");
+if (menuButton && navLinks) {
+  navLinks.id ||= "primary-navigation";
+  menuButton.setAttribute("aria-controls", navLinks.id);
+  menuButton.setAttribute("aria-expanded", "false");
+
+  const closeMenu = () => {
+    navLinks.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  };
+
+  menuButton.addEventListener("click", () => {
+    const isOpen = navLinks.classList.toggle("open");
+    menuButton.setAttribute("aria-expanded", String(isOpen));
+  });
+  navLinks.addEventListener("click", (event) => {
+    if (event.target.closest("a")) closeMenu();
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeMenu();
+  });
+
+  const currentPath = window.location.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+  navLinks.querySelectorAll("a[href]").forEach((link) => {
+    const url = new URL(link.href, window.location.href);
+    if (url.hash) return;
+    const linkPath = url.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") || "/";
+    if (linkPath === currentPath) link.setAttribute("aria-current", "page");
+  });
+}
 
 const callButton = document.querySelector("[data-phone]");
 if (callButton) {
@@ -100,10 +139,13 @@ document.querySelectorAll("form").forEach((form) => {
 const whatsapp = document.createElement("a");
 whatsapp.className = "whatsapp-float";
 whatsapp.href =
-  "https://wa.me/917988745047?text=Hello%20AdCool%20Products%2C%20I%20would%20like%20to%20enquire%20about%20your%20HVAC%20solutions.";
+  "https://wa.me/919953195901?text=Hello%20AdCool%20India%20Private%20Limited%2C%20I%20would%20like%20to%20enquire%20about%20Panel%20AC%2C%20Chillers%20or%20AMC.";
 whatsapp.target = "_blank";
 whatsapp.rel = "noopener";
-whatsapp.setAttribute("aria-label", "Message AdCool Products on WhatsApp");
+whatsapp.setAttribute(
+  "aria-label",
+  "Message AdCool India Private Limited on WhatsApp",
+);
 whatsapp.innerHTML = `
   <span class="whatsapp-icon" aria-hidden="true">
     <svg viewBox="0 0 24 24" role="img" aria-hidden="true">

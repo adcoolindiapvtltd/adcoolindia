@@ -1,6 +1,6 @@
-# AdCool Products website
+# AdCool India Private Limited website
 
-Static marketing website for AdCool Products, ready to deploy with GitHub Pages.
+Static marketing website for AdCool India Private Limited, ready to deploy with GitHub Pages.
 
 ## Publish with GitHub Pages
 
@@ -15,7 +15,7 @@ GitHub will publish the site at `https://<username>.github.io/<repository-name>/
 
 If the public domain changes, update every occurrence of `https://adcolproducts.vercel.app`. These values appear in canonical tags, structured data, `robots.txt`, and `sitemap.xml`.
 
-Also replace the contact-detail placeholders on the contact page with AdCool's real business details.
+Verify that the business name, address, phone number and email on the contact page are accurate before publishing.
 
 ## Enquiry email delivery
 

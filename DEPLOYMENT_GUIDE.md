@@ -1,8 +1,8 @@
 # AdCool Website - GitHub Deployment Guide
 
-## ✅ Website Status: READY FOR PRODUCTION
+## Website Scope & Deployment
 
-Your AdCool website has been fully tested and is ready to deploy on GitHub Pages. All functionality is working correctly including the skeleton loader, navigation, forms, and responsive design.
+This static site focuses on Panel Air Conditioners, Industrial Chillers and AMC. Validate links, forms, business details and responsive behavior before publishing.
 
 ---
 
@@ -13,7 +13,7 @@ Your AdCool website has been fully tested and is ready to deploy on GitHub Pages
 1. Go to [github.com](https://github.com)
 2. Click **New Repository**
 3. Repository name: `adcool-website`
-4. Description: "Professional HVAC & Cooling Solutions Website"
+4. Description: "Panel Air Conditioners, Industrial Chillers & AMC"
 5. Choose Public (for GitHub Pages)
 6. DO NOT initialize with README (already exists)
 7. Click **Create Repository**
@@ -74,11 +74,10 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
    - Update og:image URLs if hosting images externally
    - Update organization URL in structured data
 
-### Add Business Information
+### Verify Business Information
 1. **contact/index.html**
-   - Replace placeholder business name with "AdCool Products"
-   - Update placeholder address with actual address
-   - Verify phone number: +91 7988745047
+   - Verify the business name and address
+   - Verify phone number: +91 99531 95901
    - Verify email: adcoolproducts@gmail.com
    - Update WhatsApp number if different
 
@@ -108,27 +107,26 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
 
 ---
 
-## ✅ What's Included & Tested
+## What's Included
 
-### Functionality ✅
+### Included functionality
 - Homepage with hero section
-- 4 Product pages (Panel AC, Air-Cooled Chiller, Water-Cooled Chiller, Industrial Chiller)
+- 2 Product pages (Panel Air Conditioner and Industrial Chiller)
 - About page
 - Contact page with form
-- HVAC AMC Services page
+- AMC services page for Panel AC and Chiller
 - Responsive mobile menu
 - WhatsApp floating button
 - Form validation
 
-### Performance ✅
+### Performance considerations
 - Skeleton loader with grey/white theme
 - Smooth page transitions
 - Optimized CSS and JavaScript
-- No console errors
 - Image optimization
 - SEO-friendly structure
 
-### SEO ✅
+### SEO
 - robots.txt configured
 - sitemap.xml with all pages
 - Canonical tags on every page
@@ -138,7 +136,7 @@ Replace `https://adcolproducts.vercel.app` with your actual domain in these file
 - Structured data (Schema.org)
 - Proper heading hierarchy
 
-### Security ✅
+### Security
 - .nojekyll file (prevents Jekyll processing)
 - .gitignore configured
 - No sensitive information in code
