@@ -4,6 +4,12 @@
 
 This static site focuses on Panel Air Conditioners, Industrial Chillers and AMC. Validate links, forms, business details and responsive behavior before publishing.
 
+### Production error pages (Cloudflare Pages)
+
+Deploy the repository root so Cloudflare Pages detects `functions/_middleware.js` and `_routes.json`. The middleware replaces HTML error responses with a branded page and preserves the original 4xx/5xx status; it intentionally skips 402 because the site has no payment flow. `_routes.json` excludes static assets from Functions execution.
+
+The middleware cannot customize Cloudflare-generated errors that occur before a request reaches Pages, including some WAF, TLS and edge/network failures. Configure Cloudflare Custom Pages in the dashboard for the edge errors supported by your plan. GitHub Pages uses `404.html` only and does not run this middleware.
+
 ---
 
 ## 🚀 Step-by-Step Deployment Instructions

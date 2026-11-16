@@ -2,7 +2,13 @@
 
 Static marketing website for AdCool India Private Limited, deployed on the custom domain `https://adcoolindia.com`.
 
-## Publish with GitHub Pages
+## Production deployment: Cloudflare Pages
+
+The production host is Cloudflare Pages. Deploy the repository root so the top-level `404.html`, `_routes.json` and `functions/` directory are included. The Pages middleware renders branded HTML for document requests that return 4xx or 5xx responses while preserving the original HTTP status. It deliberately leaves 402 responses unchanged because the site has no payment flow, and `_routes.json` excludes static assets from Functions execution.
+
+Cloudflare-generated errors that occur before a request reaches Pages, such as some WAF, TLS or edge/network errors, cannot be handled by the Pages middleware. Configure Cloudflare Custom Pages for supported edge errors in the Cloudflare dashboard.
+
+## GitHub Pages alternative (custom 404 only)
 
 1. Create a new GitHub repository and push this folder to its `main` branch.
 2. In the repository, open **Settings → Pages**.
@@ -10,6 +16,8 @@ Static marketing website for AdCool India Private Limited, deployed on the custo
 4. Select the `main` branch and the `/(root)` folder, then save.
 
 GitHub will publish the site at `https://<username>.github.io/<repository-name>/` for a project repository, or `https://<username>.github.io/` for a user repository.
+
+GitHub Pages serves the custom `404.html` but does not run Cloudflare Pages Functions. The other status-specific error handling is available only when deployed to Cloudflare Pages.
 
 ## Before publishing publicly
 
