@@ -2,22 +2,19 @@
 
 Static marketing website for AdCool India Private Limited, deployed on the custom domain `https://adcoolindia.com`.
 
-## Production deployment: Cloudflare Pages
+## Production deployment: Cloudflare Workers
 
-The production host is Cloudflare Pages. Deploy the repository root so the top-level `404.html`, `_routes.json` and `functions/` directory are included. The Pages middleware renders branded HTML for document requests that return 4xx or 5xx responses while preserving the original HTTP status. It deliberately leaves 402 responses unchanged because the site has no payment flow, and `_routes.json` excludes static assets from Functions execution.
+The production host is the `adcoolindia` Worker. `wrangler.jsonc` configures `worker.js` to serve static files from `public/` and run first for document requests so it can brand error responses. Static assets are excluded from Worker execution. Keep the existing deployment command:
 
-Cloudflare-generated errors that occur before a request reaches Pages, such as some WAF, TLS or edge/network errors, cannot be handled by the Pages middleware. Configure Cloudflare Custom Pages for supported edge errors in the Cloudflare dashboard.
+```bash
+npx wrangler deploy
+```
 
-## GitHub Pages alternative (custom 404 only)
+The Worker returns branded HTML for document requests that receive 4xx or 5xx responses while preserving the original HTTP status. It deliberately leaves 402 responses unchanged because the site has no payment flow.
 
-1. Create a new GitHub repository and push this folder to its `main` branch.
-2. In the repository, open **Settings → Pages**.
-3. Under **Build and deployment**, choose **Deploy from a branch**.
-4. Select the `main` branch and the `/(root)` folder, then save.
+Cloudflare-generated errors that occur before a request reaches the Worker, such as some WAF, TLS or edge/network errors, cannot be handled by the Worker. Configure Cloudflare Custom Pages for supported edge errors in the Cloudflare dashboard.
 
-GitHub will publish the site at `https://<username>.github.io/<repository-name>/` for a project repository, or `https://<username>.github.io/` for a user repository.
-
-GitHub Pages serves the custom `404.html` but does not run Cloudflare Pages Functions. The other status-specific error handling is available only when deployed to Cloudflare Pages.
+The static output lives in `public/`, so the default GitHub Pages branch-root setup will not publish it. A GitHub Actions workflow can publish `public/` as static files if needed, but GitHub Pages will not run the Cloudflare Worker error handling.
 
 ## Before publishing publicly
 
@@ -31,9 +28,9 @@ Both enquiry forms send submissions to `sales@adcoolindia.com` through FormSubmi
 
 ## Analytics and consent
 
-Optional Google Analytics is opt-in only and is currently disabled because no GA4 Measurement ID has been supplied. Set `ANALYTICS_MEASUREMENT_ID` in `app.js` to the verified GA4 ID to enable the consent controls and defer tracking until acceptance. Do not add a separate analytics script that bypasses this consent flow.
+Optional Google Analytics is opt-in only and is currently disabled because no GA4 Measurement ID has been supplied. Set `ANALYTICS_MEASUREMENT_ID` in `public/app.js` to the verified GA4 ID to enable the consent controls and defer tracking until acceptance. Do not add a separate analytics script that bypasses this consent flow.
 
-The Privacy Policy and Terms pages are available at `/privacy-policy/` and `/terms/`. Browser, Apple touch, Android and Open Graph assets are generated under `assets/`.
+The Privacy Policy and Terms pages are available at `/privacy-policy/` and `/terms/`. Browser, Apple touch, Android and Open Graph assets are in `public/assets/`.
 
 ## Search visibility
 
@@ -45,13 +42,13 @@ The homepage, product pages and AMC page provide visible, direct answers to comm
 
 ## Local preview
 
-Serve this folder with any static-file server to test client-side page navigation.
-Opening `index.html` directly also works, but browsers may use normal page loads
-for internal links when the site is opened with a `file://` URL.
+Serve the `public/` folder with any static-file server to test client-side page navigation.
+Use a static server rather than opening `public/index.html` directly, since
+root-relative assets and browser security rules may not work with a `file://` URL.
 
 Internal links fetch the destination page and update browser history without
 reloading the shared layout. Direct page visits and form submissions continue
 to use normal browser requests. Images are served as compressed JPEGs and fonts
 are self-hosted to avoid external font requests.
 
-The `.nojekyll` file ensures GitHub Pages serves the site files exactly as written.
+The `public/.nojekyll` file disables Jekyll processing on hosts that support it.

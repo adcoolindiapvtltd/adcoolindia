@@ -1,62 +1,30 @@
-# AdCool Website - GitHub Deployment Guide
+# AdCool Website - Deployment Guide
 
 ## Website Scope & Deployment
 
 This static site focuses on Panel Air Conditioners, Industrial Chillers and AMC. Validate links, forms, business details and responsive behavior before publishing.
 
-### Production error pages (Cloudflare Pages)
+### Production error pages (Cloudflare Workers)
 
-Deploy the repository root so Cloudflare Pages detects `functions/_middleware.js` and `_routes.json`. The middleware replaces HTML error responses with a branded page and preserves the original 4xx/5xx status; it intentionally skips 402 because the site has no payment flow. `_routes.json` excludes static assets from Functions execution.
+The `adcoolindia` Worker is configured by `wrangler.jsonc`. It serves static files from `public/` and runs `worker.js` first for document requests so it can customize error responses; static assets bypass the Worker. Keep the existing deployment command and run it from the repository root:
 
-The middleware cannot customize Cloudflare-generated errors that occur before a request reaches Pages, including some WAF, TLS and edge/network failures. Configure Cloudflare Custom Pages in the dashboard for the edge errors supported by your plan. GitHub Pages uses `404.html` only and does not run this middleware.
+```bash
+npx wrangler deploy
+```
+
+The Worker replaces HTML error responses with a branded page and preserves the original 4xx/5xx status; it intentionally skips 402 because the site has no payment flow.
+
+The Worker cannot customize Cloudflare-generated errors that occur before a request reaches it, including some WAF, TLS and edge/network failures. Configure Cloudflare Custom Pages in the dashboard for the edge errors supported by your plan. GitHub Pages can serve the static `public/404.html`, but does not run this Worker.
 
 ---
 
-## 🚀 Step-by-Step Deployment Instructions
+## Deployment checklist
 
-### 1. Create GitHub Repository
-
-1. Go to [github.com](https://github.com)
-2. Click **New Repository**
-3. Repository name: `adcool-website`
-4. Description: "Panel Air Conditioners, Industrial Chillers & AMC"
-5. Choose Public (for GitHub Pages)
-6. DO NOT initialize with README (already exists)
-7. Click **Create Repository**
-
-### 2. Push Project to GitHub
-
-Open terminal in the project directory and run:
-
-```bash
-# Check git status
-git status
-
-# Add all files
-git add .
-
-# Commit changes
-git commit -m "Initial AdCool website commit - production ready"
-
-# Add remote repository (replace with your GitHub username)
-git remote add origin https://github.com/YOUR-USERNAME/adcool-website.git
-
-# Push to main branch
-git push -u origin main
-```
-
-### 3. Enable GitHub Pages
-
-1. Go to your repository on GitHub
-2. Click **Settings** (top right)
-3. In left sidebar, click **Pages**
-4. Under "Build and deployment":
-   - Source: **Deploy from a branch**
-   - Branch: **main**
-   - Folder: **/(root)**
-5. Click **Save**
-6. Wait 2-3 minutes for GitHub to build and publish
-7. Your site will be live at: `https://YOUR-USERNAME.github.io/adcool-website/`
+- [ ] Confirm the existing Cloudflare Worker is named `adcoolindia`.
+- [ ] Keep the deployment command as `npx wrangler deploy`.
+- [ ] Keep the working directory at the repository root so Wrangler can find `wrangler.jsonc` and `worker.js`.
+- [ ] Confirm `public/` contains `index.html` and `404.html`.
+- [ ] Verify a preview deployment before publishing to production.
 
 ---
 
@@ -161,7 +129,7 @@ The verified production domain is `https://adcoolindia.com`. If the domain chang
 ## 🔗 After Deployment
 
 ### 1. Test Your Website
-- [ ] Visit: `https://YOUR-USERNAME.github.io/adcool-website/`
+- [ ] Visit: `https://adcoolindia.com`
 - [ ] Test all links work
 - [ ] Test mobile responsive design
 - [ ] Test forms (if configured)
@@ -178,13 +146,8 @@ The verified production domain is `https://adcoolindia.com`. If the domain chang
 - [ ] Verify tracking remains off until consent is accepted
 - [ ] Configure conversions after analytics is enabled
 
-### 4. Custom Domain (Optional)
-If using your own domain:
-1. Go to Settings → Pages
-2. Under "Custom domain": enter your domain
-3. Click Save
-4. Update your domain's DNS CNAME record to point to GitHub Pages
-5. GitHub will auto-enable HTTPS (after DNS is configured)
+### 4. Custom Domain
+Manage `adcoolindia.com` under the `adcoolindia` Worker's **Custom Domains and Routes** settings. Confirm HTTPS is active before submitting the sitemap or testing forms.
 
 ---
 
@@ -202,11 +165,10 @@ The enquiry forms use **FormSubmit.co** for email delivery:
 
 ## 🔧 Troubleshooting
 
-### GitHub Pages not showing?
-- Ensure branch is set to "main"
-- Check that .nojekyll file is present
-- Wait 5 minutes for GitHub to build
-- Check Actions tab for build errors
+### Cloudflare Worker deployment failing?
+- Confirm the command is `npx wrangler deploy` and it runs from the repository root.
+- Check that `wrangler.jsonc`, `worker.js` and the `public/` site output are present.
+- Verify that the Cloudflare API credentials used by the build can deploy to the existing Worker.
 
 ### Links not working?
 - Verify all internal links use relative paths
@@ -224,7 +186,7 @@ The enquiry forms use **FormSubmit.co** for email delivery:
 ## 📞 Support
 
 For questions about:
-- **GitHub Pages**: https://docs.github.com/en/pages
+- **Cloudflare Workers**: https://developers.cloudflare.com/workers/
 - **DNS Configuration**: Contact your domain registrar
 - **Form Submission**: https://formsubmit.co
 - **Google Analytics**: https://support.google.com/analytics
@@ -248,5 +210,5 @@ Your deployment is successful when:
 
 **Website Version**: 1.0 Production Ready
 **Last Updated**: 2026-11-16
-**Deployed by**: GitHub Pages
+**Deployed by**: Cloudflare Workers
 **Framework**: Static HTML/CSS/JavaScript

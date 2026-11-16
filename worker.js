@@ -110,23 +110,25 @@ function errorResponse(request, status, originalResponse) {
   return new Response(body, { status, headers });
 }
 
-export async function onRequest(context) {
-  let response;
+export default {
+  async fetch(request, env) {
+    let response;
 
-  try {
-    response = await context.next();
-  } catch (error) {
-    console.error("Cloudflare Pages request failed", error);
-    return errorResponse(context.request, 500);
+    try {
+      response = await env.ASSETS.fetch(request);
+    } catch (error) {
+      console.error("Cloudflare Worker asset request failed", error);
+      return errorResponse(request, 500);
+    }
+
+    if (
+      response.status < 400 ||
+      response.status === 402 ||
+      !acceptsHtml(request)
+    ) {
+      return response;
+    }
+
+    return errorResponse(request, response.status, response);
   }
-
-  if (
-    response.status < 400 ||
-    response.status === 402 ||
-    !acceptsHtml(context.request)
-  ) {
-    return response;
-  }
-
-  return errorResponse(context.request, response.status, response);
-}
+};
