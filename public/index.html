@@ -173,7 +173,7 @@
     <header>
       <nav class="nav container">
         <a class="brand" href="/"
-          ><img src="assets/adcool-logo.png" alt="AdCool India Private Limited logo" /></a
+          ><img src="assets/adcool-logo.png" alt="AdCool India Private Limited logo" width="768" height="768" /></a
         ><button class="menu-btn" aria-label="Open menu">☰</button>
         <div class="nav-links">
           <a href="/">Home</a>
@@ -192,6 +192,19 @@
     </header>
     <main>
       <section class="hero">
+        <video
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="/hero/poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/hero/hero.webm" type="video/webm" />
+          <source src="/hero/hero.mp4" type="video/mp4" />
+        </video>
         <div class="container hero-content">
           <div class="hero-kicker">AdCool · Industrial Cooling</div>
           <h1>Panel AC, Chillers &amp; AMC</h1>
@@ -209,41 +222,6 @@
               >Call Us</a
             >
           </div>
-        </div>
-        <div class="hero-visuals">
-          <a
-            class="cooling-scene"
-            href="/panel-air-conditioner/"
-            aria-label="Explore the AdCool Panel Air Conditioner"
-          >
-            <span class="scene-glow" aria-hidden="true"></span>
-            <span class="airflow airflow-one" aria-hidden="true"></span>
-            <span class="airflow airflow-two" aria-hidden="true"></span>
-            <span class="airflow airflow-three" aria-hidden="true"></span>
-            <span class="scene-platform" aria-hidden="true"></span>
-            <span class="panel-unit" aria-hidden="true">
-              <span class="panel-side"></span>
-              <span class="panel-front">
-                <span class="panel-vents">
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                  <i></i><i></i><i></i><i></i><i></i><i></i>
-                </span>
-                <span class="panel-brand"><b>▲</b> ADCOOL</span>
-                <span class="panel-controls">
-                  <i class="panel-display">18°</i>
-                  <i class="panel-gauge"><b></b></i>
-                </span>
-                <span class="panel-fans">
-                  <i class="panel-fan"><b></b></i>
-                  <i class="panel-fan"><b></b></i>
-                </span>
-              </span>
-            </span>
-            <span class="scene-label" aria-hidden="true">
-              <b>Panel Air Conditioner</b>
-              <small>Precision cooling for control panels</small>
-            </span>
-          </a>
         </div>
         <div class="scroll">Scroll to explore</div>
       </section>
@@ -287,6 +265,8 @@
               <img
                 src="assets/panel-ac.jpg"
                 alt="AdCool industrial panel air conditioner"
+                width="1200"
+                height="800"
                 loading="lazy"
                 decoding="async"
               />
@@ -305,6 +285,8 @@
               <img
                 src="assets/chiller-detail.jpg"
                 alt="AdCool industrial chiller for process cooling"
+                width="1200"
+                height="1200"
                 loading="lazy"
                 decoding="async"
               />
@@ -324,6 +306,8 @@
             <img
               src="assets/amc-service.jpg"
               alt="Technician performing chiller maintenance"
+              width="1200"
+              height="800"
               loading="lazy"
               decoding="async"
             />
@@ -490,7 +474,7 @@
         <div class="grid">
           <div>
             <a class="brand" href="/"
-              ><img src="assets/adcool-logo.png" alt="AdCool India Private Limited"
+              ><img src="assets/adcool-logo.png" alt="AdCool India Private Limited" width="768" height="768"
             /></a>
             <p>Panel Air Conditioners · Industrial Chillers · AMC</p>
           </div>

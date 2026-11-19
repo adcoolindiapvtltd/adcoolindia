@@ -419,6 +419,17 @@ if ("scrollRestoration" in history) {
 updateCurrentPage();
 ensureMobileCta();
 initializeCookieBanner();
+const heroVideo = document.querySelector(".hero-video");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+if (heroVideo) {
+  if (reducedMotion.matches) {
+    heroVideo.pause();
+  }
+  reducedMotion.addEventListener("change", (event) => {
+    if (event.matches) heroVideo.pause();
+    else void heroVideo.play();
+  });
+}
 if (ANALYTICS_MEASUREMENT_ID && readStorage(ANALYTICS_CONSENT_KEY) === "accepted") {
   loadAnalytics();
 }

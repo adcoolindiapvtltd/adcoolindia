@@ -38,7 +38,7 @@ The site includes page-specific titles and descriptions, canonical URLs, Open Gr
 
 ## Answer engine readiness
 
-The homepage, product pages and AMC page provide visible, direct answers to common buyer questions. Their `FAQPage` structured data mirrors the on-page answers, while page and entity markup connects those pages to the business. Keep the visible answers and JSON-LD synchronized. Add only confirmed product specifications, prices, service areas, certifications and business profiles; do not infer missing facts. Structured data does not guarantee citations, rankings or enhanced search results. Search engines and answer engines make their own selection decisions.
+The homepage, product pages and AMC page provide visible, direct answers to common buyer questions. Their `FAQPage` structured data mirrors the on-page answers, while page and entity markup connects those pages to the business. Keep the visible answers and JSON-LD synchronized. Add only confirmed product specifications, prices, service areas, certifications and business profiles; do not infer missing facts. Publish author bios and first-hand case studies only when staff credentials and customer/project details are verified, and cite credible sources for externally sourced claims. Structured data does not guarantee citations, rankings or enhanced search results. Search engines and answer engines make their own selection decisions.
 
 ## Local preview
 
