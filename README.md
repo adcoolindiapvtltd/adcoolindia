@@ -20,11 +20,11 @@ The static output lives in `public/`, so the default GitHub Pages branch-root se
 
 The verified public domain is `https://adcoolindia.com`. If it changes, update canonical and Open Graph URLs, structured data, `robots.txt`, `sitemap.xml`, and FormSubmit's redirect URL together.
 
-Verified public contact details are +91 99531 95901, `info@adcoolindia.com`, `sales@adcoolindia.com`, and Tajnagar, Gurugram, Haryana, India.
+Verified public contact details are +91 99531 95901, `info@adcoolindia.com`, and Tajnagar, Gurugram, Haryana, India.
 
 ## Enquiry email delivery
 
-Both enquiry forms send submissions to `sales@adcoolindia.com` through FormSubmit and redirect to the site's thank-you page. After deployment, submit a test enquiry and complete FormSubmit's email activation for this inbox.
+Both enquiry forms send submissions to `info@adcoolindia.com` through FormSubmit and redirect to the site's thank-you page. After deployment, submit a test enquiry and complete FormSubmit's email activation for this inbox.
 
 ## Analytics and consent
 

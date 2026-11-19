@@ -52,7 +52,7 @@ The verified production domain is `https://adcoolindia.com`. If the domain chang
 1. **contact/index.html**
    - Verify the business name
    - Verify phone number: +91 99531 95901
-   - Verify emails: info@adcoolindia.com and sales@adcoolindia.com
+   - Verify email: info@adcoolindia.com
    - Verify address: Tajnagar, Gurugram, Haryana, India
    - Update WhatsApp number if different
 
@@ -158,9 +158,9 @@ The enquiry forms use **FormSubmit.co** for email delivery:
 
 1. After deployment, visit your website
 2. Fill out and submit the contact form once
-3. You'll receive an activation email at `sales@adcoolindia.com`
+3. You'll receive an activation email at `info@adcoolindia.com`
 4. Confirm by clicking the activation link
-5. All future submissions will be delivered to the sales inbox and redirect to `/thank-you/`
+5. All future submissions will be delivered to the business inbox and redirect to `/thank-you/`
 
 ---
 

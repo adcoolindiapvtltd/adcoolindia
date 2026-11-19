@@ -42,8 +42,8 @@ Quick project map for future work. This is a static HTML/CSS/JavaScript website;
 - `public/styles.css` defines the color tokens, typography, responsive breakpoints, forms, loading feedback, cookie banner, legal pages and sticky mobile CTA.
 - `public/app.js` provides same-origin partial navigation and history handling, a loading progress indicator, mobile call/WhatsApp/quote actions, accessible form validation states, FormSubmit sending feedback, and opt-in-gated analytics.
 - `ANALYTICS_MEASUREMENT_ID` in `public/app.js` is intentionally empty until the site owner supplies a GA4 ID. Analytics must remain disabled until a visitor opts in.
-- Enquiry forms POST to FormSubmit (`sales@adcoolindia.com`) and redirect to `/thank-you/`. FormSubmit must be activated for the sales inbox after deployment.
-- Contact/WhatsApp number: `+91 99531 95901`. Business emails: `info@adcoolindia.com` and `sales@adcoolindia.com`. Address: Tajnagar, Gurugram, Haryana, India.
+- Enquiry forms POST to FormSubmit (`info@adcoolindia.com`) and redirect to `/thank-you/`. FormSubmit must be activated for this inbox after deployment.
+- Contact/WhatsApp number: `+91 99531 95901`. Business email: `info@adcoolindia.com`. Address: Tajnagar, Gurugram, Haryana, India.
 - The only products offered are Panel Air Conditioners and Industrial Chillers; the only service offer is AMC for installed cooling equipment.
 - There is no package manifest or build pipeline; the `adcoolindia` Worker serves static files from `public/`. `wrangler.jsonc` configures deployment with `npx wrangler deploy`.
 
