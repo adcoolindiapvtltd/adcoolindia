@@ -1299,12 +1299,6 @@ body.is-navigating:after {
   html {
     scroll-behavior: auto;
   }
-  .hero {
-    background: #000 url("/hero/poster.jpg") center / cover no-repeat;
-  }
-  .hero-video {
-    display: none;
-  }
   *,
   *:before,
   *:after {
